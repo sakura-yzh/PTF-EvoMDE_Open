@@ -14,7 +14,7 @@ from models.mdenet_train import EvoMDENet
 import os
 
 import numpy as np
-from utils_newcrfs import post_process_depth, compute_errors, flip_lr
+from utils_newcrfs import post_process_depth, compute_errors, flip_lr, compute_errors_colon
 
 from tqdm import tqdm
 from dataloader import NewDataLoader
@@ -109,21 +109,39 @@ def single_test(model, data_loader, args):
 
             valid_mask = np.logical_and(valid_mask, eval_mask)
 
-        measures = compute_errors(gt_depth[valid_mask], pred_depth[valid_mask])
-        eval_measures[:9] += torch.tensor(measures).cuda()
-        eval_measures[9] += 1
+        if args.dataset == 'colon':
+            measures = compute_errors_colon(gt_depth[valid_mask], pred_depth[valid_mask])
+            eval_measures[:4] += torch.tensor(measures).cuda()
+            eval_measures[4] += 1
+        else:
+            measures = compute_errors(gt_depth[valid_mask], pred_depth[valid_mask])
+            eval_measures[:9] += torch.tensor(measures).cuda()
+            eval_measures[9] += 1
+            
 
-    eval_measures_cpu = eval_measures.cpu()
-    cnt = eval_measures_cpu[9].item()
-    eval_measures_cpu /= cnt
-    print('Computing errors for {} eval samples, post_process: {}'.format(int(cnt), args.post_process))
-    print("{:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}".format('silog', 'abs_rel', 'log10', 'rms',
-                                                                                'sq_rel', 'log_rms', 'd1', 'd2',
-                                                                                'd3'))
+    if args.dataset == 'colon':
+        eval_measures_cpu = eval_measures.cpu()
+        cnt = eval_measures_cpu[4].item()
+        eval_measures_cpu /= cnt
+        print('Computing errors for {} eval samples, post_process: {}'.format(int(cnt), args.post_process))
+        print("{:>20}, {:>20}, {:>20}, {:>20}".format('mean_l1_error', 'mean_rel_l1_error', 'mean_rmse', 'd05'))
 
-    eval_measures_str = ', '.join(['{:7.4f}'.format(eval_measures_cpu[i]) for i in range(8)])
-    eval_measures_str += ', {:7.4f}'.format(eval_measures_cpu[8])
-    print(eval_measures_str)
+        eval_measures_str = ', '.join(['{:20.4f}'.format(eval_measures_cpu[i]) for i in range(3)])
+        eval_measures_str += ', {:20.4f}'.format(eval_measures_cpu[3])
+        print(eval_measures_str)
+    else:
+    # For kitti and nyu
+        eval_measures_cpu = eval_measures.cpu()
+        cnt = eval_measures_cpu[9].item()
+        eval_measures_cpu /= cnt
+        print('Computing errors for {} eval samples, post_process: {}'.format(int(cnt), args.post_process))
+        print("{:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}".format('silog', 'abs_rel', 'log10', 'rms',
+                                                                                    'sq_rel', 'log_rms', 'd1', 'd2',
+                                                                                    'd3'))
+
+        eval_measures_str = ', '.join(['{:7.4f}'.format(eval_measures_cpu[i]) for i in range(8)])
+        eval_measures_str += ', {:7.4f}'.format(eval_measures_cpu[8])
+        print(eval_measures_str)
 
     return eval_measures_cpu
 

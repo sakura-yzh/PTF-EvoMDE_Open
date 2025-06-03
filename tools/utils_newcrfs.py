@@ -98,6 +98,18 @@ def compute_errors(gt, pred):
 
     return [silog, abs_rel, log10, rms, sq_rel, log_rms, d1, d2, d3]
 
+def compute_errors_colon(gt, pred):
+    thresh = np.maximum((gt / pred), (pred / gt))
+    d05 = (thresh < 1.25**0.5).mean()
+    l1_error = np.abs(gt - pred).mean()  # l1_error
+    epsilon = 1e-8
+    relative_l1_error = np.abs(gt - pred) / (gt + epsilon)
+    mean_relative_l1_error = relative_l1_error.mean()  # mean_relative_l1_error
+    rms = (gt - pred) ** 2
+    rms = np.sqrt(rms.mean())
+
+    return [l1_error, mean_relative_l1_error, rms, d05]
+
 
 class silog_loss(nn.Module):
     def __init__(self, variance_focus):  # variance_focus=0.85
