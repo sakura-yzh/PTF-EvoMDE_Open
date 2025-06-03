@@ -2,7 +2,7 @@
 
 
 <div align="center">
-  <img src="assets/framework.png" width="85%" />
+  <img src="assets/framework.png" width="100%" />
 </div>
 
 PTF-EvoMDE is an efficient NAS framework for monocular depth estimation. It eliminates the need for per-candidate pretraining by introducing hierarchical parameter mapping (HPM), and enhances depth prediction with a lightweight, feature-aligned CRFs decoder. PTF-EvoMDE achieves competitive performance on KITTI and NYUv2 with significantly reduced computation and strong transferability to detection and segmentation tasks.
@@ -63,7 +63,7 @@ sh scripts/test/colon_test.sh
 |[NYUv2](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/newcrfs/models/model_nyu.ckpt) | 6.13 | 0.1108 | 0.0675 | 0.4003 | 0.1448 | 0.8769 | 0.9775 | 0.9947  |
 |[KITTI_Eigen](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/newcrfs/models/model_kittieigen.ckpt) | 6.26 | 0.0621 | 0.2173 | 2.5566 | 0.0954 | 0.9578 | 0.9943 | 0.9988 |
 
-| Model | Params.| Mean L1-error  | Mean Relative L1-error  | Mean RMSE | d05 |
+| Model | Params.| Mean L1-error  | Mean Relative L1-error  | Mean RMSE | a05 |
 | :--- | :---: | :---: | :---: |  :---: |  :---: | 
 |[Colon](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/newcrfs/models/model_nyu.ckpt) | 6.26 | 0.1397 | 0.0543 | 0.2306 | 0.8919 |
 
@@ -71,6 +71,6 @@ sh scripts/test/colon_test.sh
 ## NYUv2 Quantitative Comparison
 
 <div align="center">
-  <img src="assets/nyu_compare.png" width="85%" />
+  <img src="assets/nyu_compare.png" width="95%" />
 </div>
 
