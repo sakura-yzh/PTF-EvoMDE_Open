@@ -1,0 +1,6 @@
+# global
+**/__pycache__
+**/_ignore
+**/log
+*.pth
+
