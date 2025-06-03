@@ -60,12 +60,12 @@ sh scripts/test/colon_test.sh
 ## Models
 | Model | Params.| Abs Rel | Sq Rel | RMSE | RMSE log | a1 | a2 | a3| 
 | :--- | :---: | :---: | :---: |  :---: |  :---: |  :---: |  :---: |  :---: |
-|[NYUv2](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/newcrfs/models/model_nyu.ckpt) | 6.13 | 0.1108 | 0.0675 | 0.4003 | 0.1448 | 0.8769 | 0.9775 | 0.9947  |
-|[KITTI_Eigen](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/newcrfs/models/model_kittieigen.ckpt) | 6.26 | 0.0621 | 0.2173 | 2.5566 | 0.0954 | 0.9578 | 0.9943 | 0.9988 |
+|[NYUv2](https://github.com/sakura-yzh/PTF-EvoMDE_Open/releases/download/weight_files/nyu_best.pth) | 6.13 | 0.1108 | 0.0675 | 0.4003 | 0.1448 | 0.8769 | 0.9775 | 0.9947  |
+|[KITTI(Eigen)](https://github.com/sakura-yzh/PTF-EvoMDE_Open/releases/download/weight_files/kitti_best.pth) | 6.26 | 0.0621 | 0.2173 | 2.5566 | 0.0954 | 0.9578 | 0.9943 | 0.9988 |
 
 | Model | Params.| Mean L1-error  | Mean Relative L1-error  | Mean RMSE | a05 |
 | :--- | :---: | :---: | :---: |  :---: |  :---: | 
-|[Colon](https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/newcrfs/models/model_nyu.ckpt) | 6.26 | 0.1397 | 0.0543 | 0.2306 | 0.8919 |
+|[Colon](https://github.com/sakura-yzh/PTF-EvoMDE_Open/releases/download/weight_files/colon_best.pth) | 6.26 | 0.1397 | 0.0543 | 0.2306 | 0.8919 |
 
 
 ## NYUv2 Quantitative Comparison
